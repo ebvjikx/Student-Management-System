@@ -14,7 +14,7 @@ public class Student {
 	private int age;
 	private double balance;
 	//private boolean fulltime_status;
-	private int no_courses_enrolled = 0;
+	private int no_courses_enrolled;
 	private ArrayList<Course> courses_enrolled;
 	private final String registration_date;
 	private final String dob;
@@ -27,6 +27,7 @@ public class Student {
 		this.lastName = lname;
 		this.age = this.getAge(dob);
 		this.student_id = this.generateID(registration_date, dob);
+		this.no_courses_enrolled = 0; 
 	}
 	
 	private int getAge(String dob) {
@@ -53,19 +54,55 @@ public class Student {
 	
 	public boolean enrollInCourse(Course course) {
 		
-		if (courses_enrolled.contains(course))
+		if (courses_enrolled.contains(course) || course.getAvailableSeats() == 0)
 				return false;
 		else {
-			courses_enrolled.add(course);
-			no_courses_enrolled++;
+			this.courses_enrolled.add(course);
+			this.no_courses_enrolled++;
 			this.balance += course.getPrice();
-			course.studentEnrolled();
+			course.studentEnrolled(this);
 			
 			return true;
 		}
 	}
 	
+	public boolean dropCourse(Course course) {
+		
+		if (!courses_enrolled.contains(course))
+				return false;
+		else {
+			this.courses_enrolled.remove(course);
+			this.no_courses_enrolled--;
+			this.balance -= course.getPrice();
+			course.studentDropped(this);
+			
+			return true;
+		}
+	}
 	
+	public String getFullName() {
+		return this.firstName + " " + this.lastName;
+	}
+	
+	public int getAge() {
+		return this.age;
+	}
+	
+	public String getStudentID() {
+		return this.student_id;
+	}
+	
+	public double getBalance() {
+		return this.balance;
+	}
+	
+	public String getDOB() {
+		return this.dob;
+	}
+	
+	public int getNoCourseEnrolled() {
+		return this.no_courses_enrolled;
+	}
 	
 	/*
 	public static void main(String[] args) {
