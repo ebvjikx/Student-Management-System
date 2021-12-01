@@ -1,7 +1,6 @@
 package smsytem;
 
 import java.time.*;
-import java.time.Duration;
 import java.time.format.DateTimeFormatter;
 
 public class Student {
@@ -23,7 +22,7 @@ public class Student {
 		this.dob = dob;
 		this.firstName = fname;
 		this.lastName = lname;
-		//this.age = LocalDate.parse(dob);
+		this.age = getAge(dob);
 	}
 	
 	private static int getAge(String dob) {
@@ -34,8 +33,9 @@ public class Student {
 		return age;
 	}
 	
+	/*
 	public static void main(String[] args) {
 		int age = getAge("2001-06-03");
 		System.out.println(age);
-	}
+	} */
 }
