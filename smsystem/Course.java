@@ -58,4 +58,13 @@ public class Course {
 	public double getCredits() {
 		return this.no_of_credits;
 	}
+	
+	public String toString() {
+		return String.format("Course Name: %s\n"
+				+ "Course Number: %s\n"
+				+ "Credits: %.1f\n"
+				+ "Course Price: $%.2f\n"
+				+ "Available Seats: %d\n"
+				, this.course_name, this.course_num, this.no_of_credits, this.price, this.seats_available);
+	}
 }

@@ -113,6 +113,15 @@ public class Student {
 		return this.total_credits;
 	}
 	
+	public String toString() {
+		return String.format("Name: %\n"
+				+ "Student ID: %s\n"
+				+ "DoB: %s\n"
+				+ "Regstration Date: %s\n"
+				+ "Total Credits: %.1f\n"
+				+ "Balance: $%.2f\n"
+				, this.getFullName(), this.student_id, this.dob, this.registration_date, this.total_credits, this.balance);
+	}
 	/*
 	public static void main(String[] args) {
 		String age = generateID("30-11-2099", "03-06-2001");
