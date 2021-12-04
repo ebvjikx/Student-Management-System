@@ -1,4 +1,4 @@
-package smsytem;
+package smsystem;
 
 import java.util.ArrayList;
 
@@ -53,5 +53,9 @@ public class Course {
 	
 	public int getStudentsEnrolled() {
 		return this.no_students_enrolled;
+	}
+	
+	public double getCredits() {
+		return this.no_of_credits;
 	}
 }

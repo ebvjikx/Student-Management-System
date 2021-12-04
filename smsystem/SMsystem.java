@@ -1,6 +1,6 @@
-package smsytem;
+package smsystem;
 
-public class SMsytem {
+public class SMsystem {
 
 	public static void main(String[] args) {
 		System.out.println("Hello World");

@@ -1,8 +1,9 @@
-package smsytem;
+package smsystem;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
 
 public class Student {
 	
@@ -15,6 +16,7 @@ public class Student {
 	private double balance;
 	//private boolean fulltime_status;
 	private int no_courses_enrolled;
+	private double total_credits;
 	private ArrayList<Course> courses_enrolled;
 	private final String registration_date;
 	private final String dob;
@@ -28,6 +30,7 @@ public class Student {
 		this.age = this.getAge(dob);
 		this.student_id = this.generateID(registration_date, dob);
 		this.no_courses_enrolled = 0; 
+		this.total_credits = 0;
 	}
 	
 	private int getAge(String dob) {
@@ -60,6 +63,7 @@ public class Student {
 			this.courses_enrolled.add(course);
 			this.no_courses_enrolled++;
 			this.balance += course.getPrice();
+			this.total_credits += course.getCredits();
 			course.studentEnrolled(this);
 			
 			return true;
@@ -74,6 +78,7 @@ public class Student {
 			this.courses_enrolled.remove(course);
 			this.no_courses_enrolled--;
 			this.balance -= course.getPrice();
+			this.total_credits -= course.getCredits();
 			course.studentDropped(this);
 			
 			return true;
@@ -102,6 +107,10 @@ public class Student {
 	
 	public int getNoCourseEnrolled() {
 		return this.no_courses_enrolled;
+	}
+	
+	public double getTotalCredits() {
+		return this.total_credits;
 	}
 	
 	/*
