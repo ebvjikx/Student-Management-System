@@ -1,8 +1,8 @@
 package smsystem;
 
+import java.util.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 
 public class Student {
@@ -17,7 +17,7 @@ public class Student {
 	//private boolean fulltime_status;
 	private int no_courses_enrolled;
 	private double total_credits;
-	private ArrayList<Course> courses_enrolled;
+	private List<Course> courses_enrolled;
 	private final String registration_date;
 	private final String dob;
 	
@@ -31,6 +31,7 @@ public class Student {
 		this.student_id = this.generateID(registration_date, dob);
 		this.no_courses_enrolled = 0; 
 		this.total_credits = 0;
+		this.courses_enrolled = new ArrayList<Course> ();
 	}
 	
 	private int getAge(String dob) {

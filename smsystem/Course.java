@@ -1,6 +1,6 @@
 package smsystem;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Course {
 	
@@ -11,7 +11,7 @@ public class Course {
 	private double no_of_credits;
 	private double price;
 	private int no_students_enrolled;
-	private ArrayList<Student> students_enrolled;
+	private List<String[]> students_enrolled;
 	private int seats_available;
 	
 	public Course(String name, String num, double credits) {
@@ -21,18 +21,21 @@ public class Course {
 		this.price = COST_PER_CREDIT * no_of_credits;
 		this.no_students_enrolled = 0;
 		this.seats_available = total_seats;
+		this.students_enrolled = new ArrayList<String[]> ();
 	}
 	
 	public void studentEnrolled(Student student) {
+		String [] student_info = {student.getFullName(), student.getStudentID()};
 		this.no_students_enrolled++;
 		this.seats_available--;
-		this.students_enrolled.add(student);
+		this.students_enrolled.add(student_info);
 	}
 	
 	public void studentDropped(Student student) {
+		String [] student_info = {student.getFullName(), student.getStudentID()};
 		this.no_students_enrolled--;
 		this.seats_available++;
-		this.students_enrolled.remove(student);
+		this.students_enrolled.remove(student_info);
 	}
 	
 	public String getCourseName() {
@@ -64,7 +67,7 @@ public class Course {
 				+ "Course Number: %s\n"
 				+ "Credits: %.1f\n"
 				+ "Course Price: $%.2f\n"
-				+ "Available Seats: %d\n"
+				+ "Seats: %d\n"
 				, this.course_name, this.course_num, this.no_of_credits, this.price, this.seats_available);
 	}
 }
