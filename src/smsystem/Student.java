@@ -34,8 +34,19 @@ public class Student {
 		this.courses_enrolled = new ArrayList<Course> ();
 	}
 	
+	public Student(String student_id, String fname, String lname, String dob, String reg_date, double total_credits, double balance) {
+		this.student_id = student_id;
+		this.firstName = fname; 
+		this.lastName = lname;
+		this.dob = dob;
+		this.registration_date = reg_date;
+		this.total_credits = total_credits;
+		this.balance = balance;
+		this.age = this.getAge(dob);
+	}
+	
 	private int getAge(String dob) {
-		LocalDate d_o_b = LocalDate.parse(dob);
+		LocalDate d_o_b = LocalDate.parse(dob, dateFormat);
 		
 		Duration age_d = Duration.between(d_o_b.atStartOfDay(), LocalDate.now().atStartOfDay());
 		int age = (int) age_d.toDays()/365;
@@ -90,6 +101,14 @@ public class Student {
 		return this.firstName + " " + this.lastName;
 	}
 	
+	public String getfName() {
+		return this.firstName;
+	}
+	
+	public String getlName() {
+		return this.lastName;
+	}
+	
 	public int getAge() {
 		return this.age;
 	}
@@ -114,8 +133,12 @@ public class Student {
 		return this.total_credits;
 	}
 	
+	public String getRegistrationDate() {
+		return this.registration_date;
+	}
+	
 	public String toString() {
-		return String.format("Name: %\n"
+		return String.format("Name: %s\n"
 				+ "Student ID: %s\n"
 				+ "DoB: %s\n"
 				+ "Regstration Date: %s\n"
