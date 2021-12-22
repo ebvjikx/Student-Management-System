@@ -20,7 +20,7 @@ public class SMSystemDB {
 		
 	static String url = "jdbc:mysql://localhost:3306/SMSystem";
 	static String uname = "root";
-	static String pword = "pipe7eb";
+	static String pword = "*******";
 	static Connection con = null;
 		
 	public static void connect() {
