@@ -2,7 +2,7 @@ package smsystem;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
+//import java.util.Arrays;
 import java.util.List;
 
 public class SMSystemDB {
@@ -20,7 +20,7 @@ public class SMSystemDB {
 		
 	static String url = "jdbc:mysql://localhost:3306/SMSystem";
 	static String uname = "root";
-	static String pword = "*******";
+	static String pword = "pipe7eb";
 	static Connection con = null;
 		
 	public static void connect() {
@@ -56,13 +56,13 @@ public class SMSystemDB {
 		string_info.forEach(System.out::println);
 		double_info.forEach(System.out::println);*/
 		
-		return new Student((String) string_info.get(0), 
-				(String) string_info.get(1),
-				(String) string_info.get(2), 
-				(String) string_info.get(3), 
-				(String) string_info.get(4), 
-				(double) double_info.get(0), 
-				(double) double_info.get(1));
+		return new Student(string_info.get(0), //student_id 
+				string_info.get(1), //first name
+				string_info.get(2), //last name
+				string_info.get(3), //dob
+				string_info.get(4), //reg_date
+				double_info.get(0), //total_credits
+				double_info.get(1)); //balance
 	}
 	
 	public static void addStudent(Student s) {
@@ -82,7 +82,91 @@ public class SMSystemDB {
 			pst.executeUpdate();
 		} catch (Exception ex) {
 			System.out.println(ex);
+		}
 	}
+		
+	public static void updateTotalCredits(Student s) {
+		try {
+			String query =  "update Student set total_credits=? where student_id=?";
+			PreparedStatement pst = con.prepareStatement(query);
+			
+			pst.setString(2, s.getStudentID());
+			pst.setDouble(1, s.getTotalCredits());
+			
+			pst.executeUpdate();
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
+	}
+	
+	public static void updateBalance(Student s) {
+		try {
+			String query =  "update Student set balance=? where student_id=?";
+			PreparedStatement pst = con.prepareStatement(query);
+			
+			pst.setString(2, s.getStudentID());
+			pst.setDouble(1, s.getBalance());
+			
+			pst.executeUpdate();
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
+	}
+	
+	public static void updateFirstName(Student s) {
+		try {
+			String query =  "update Student set fname=? where student_id=?";
+			PreparedStatement pst = con.prepareStatement(query);
+			
+			pst.setString(2, s.getStudentID());
+			pst.setString(1, s.getfName());
+			
+			pst.executeUpdate();
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
+	}
+	
+	public static void updateLastName(Student s) {
+		try {
+			String query =  "update Student set lname=? where student_id=?";
+			PreparedStatement pst = con.prepareStatement(query);
+			
+			pst.setString(2, s.getStudentID());
+			pst.setString(1, s.getlName());
+			
+			pst.executeUpdate();
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
+	}
+	
+	public static boolean studentExist(Student s) {
+		
+		try {
+			String query = "select * from Student";
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(query);
+			String student_id = " ";
+			
+			while (rs.next()) {
+				student_id = rs.getString(1);
+				
+				if (s.equals(getStudent(student_id)))
+					return true;
+				else 
+					continue;
+			}
+					
+			return false;
+		} catch (Exception ex) {
+			System.out.println(ex);
+			return false;
+		}
+	}
+	
+	
+		
 	
 		
 		//Statement st = con.Statement();
@@ -104,9 +188,6 @@ public class SMSystemDB {
 		//con.close();
 		
 		
-		
-		
-	}
 
 		
 		
