@@ -146,6 +146,15 @@ public class Student {
 				+ "Balance: $%.2f\n"
 				, this.getFullName(), this.student_id, this.dob, this.registration_date, this.total_credits, this.balance);
 	}
+	
+	/** check if student being added has already been created and in database */
+	
+	public boolean equals(Student s) {
+		return (this.firstName.equals(s.firstName)) 
+				&& this.lastName.equals(s.lastName) 
+				&& this.dob.equals(s.dob);
+	}
+	
 	/*
 	public static void main(String[] args) {
 		String age = generateID("30-11-2099", "03-06-2001");
